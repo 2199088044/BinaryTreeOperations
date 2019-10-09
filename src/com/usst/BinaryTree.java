@@ -544,18 +544,5 @@ public class BinaryTree
         System.out.println("\nDFS: ");
         DFS(copy);
         System.out.println("\n对称的树翻转后与原来的树相等! " + isTwoBinaryTreeEquals(root, copy));
-
-        //Done
-        /*
-         * 1.先中后序遍历的递归和非递归实现(6+1个方法,后序遍历非递归有两种)
-         * 2.二叉树建立的3个方式(3个方法)
-         * 3.DFS&BFS的非递归实现(2个方法)
-         * 4.DFS递归实现:二叉树的深度优先遍历即先序遍历
-         * */
-
-        //To-Do
-        /*
-         * 实现更多的功能:https://www.cnblogs.com/dawnyxl/p/9047437.html
-         * */
     }
 }
