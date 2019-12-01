@@ -4,21 +4,15 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 //根据二叉树的先中后序遍历数组重建二叉树
-public class PreInPostRebuildBinaryTree
-{
+public class PreInPostRebuildBinaryTree {
     //先序和中序重建
-    public static TreeNode preAndIn(int[] pre, int[] in)
-    {
-        if (pre.length == 0)
-            return null;
-        if (pre.length == 1)
-            return new TreeNode(pre[0]);
+    public static TreeNode preAndIn(int[] pre, int[] in) {
+        if (pre.length == 0) return null;
+        if (pre.length == 1) return new TreeNode(pre[0]);
 
         int index = 0;
-        for (int i = 0; i < in.length; i++)
-        {
-            if (pre[0] == in[i])
-            {
+        for (int i = 0; i < in.length; i++) {
+            if (pre[0] == in[i]) {
                 index = i;
                 break;
             }
@@ -32,18 +26,13 @@ public class PreInPostRebuildBinaryTree
     }
 
     //后序和中序重建
-    public static TreeNode postAndIn(int[] post, int[] in)
-    {
-        if (post.length == 0)
-            return null;
-        if (post.length == 1)
-            return new TreeNode(post[0]);
+    public static TreeNode postAndIn(int[] post, int[] in) {
+        if (post.length == 0) return null;
+        if (post.length == 1) return new TreeNode(post[0]);
 
         int index = 0;
-        for (int i = 0; i < in.length; i++)
-        {
-            if (post[post.length - 1] == in[i])
-            {
+        for (int i = 0; i < in.length; i++) {
+            if (post[post.length - 1] == in[i]) {
                 index = i;
                 break;
             }
@@ -57,34 +46,35 @@ public class PreInPostRebuildBinaryTree
     }
 
     //通过先序和中序数组生成后序数组(直接生成,不重建树),未理解
-    public static int[] getPosArray(int[] pre, int[] in)
-    {
-        if (pre == null || in == null)
-            return null;
+    public static int[] getPosArray(int[] pre, int[] in) {
+        if (pre == null || in == null) return null;
         int len = pre.length;
         int[] pos = new int[len];
         HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < len; i++)
-        {
+        for (int i = 0; i < len; i++) {
             map.put(in[i], i);
         }
         setPos(pre, 0, len - 1, in, 0, len - 1, pos, len - 1, map);
         return pos;
     }
 
-    public static int setPos(int[] p, int pi, int pj, int[] n, int ni, int nj, int[] s,
-                             int si, HashMap<Integer, Integer> map)
-    {
-        if (pi > pj)
-            return si;
+    public static int setPos(int[] p,
+                             int pi,
+                             int pj,
+                             int[] n,
+                             int ni,
+                             int nj,
+                             int[] s,
+                             int si,
+                             HashMap<Integer, Integer> map) {
+        if (pi > pj) return si;
         s[si--] = p[pi];
         int i = map.get(p[pi]);
         si = setPos(p, pj - nj + i + 1, pj, n, i + 1, nj, s, si, map);
         return setPos(p, pi + 1, pi + i - ni, n, ni, i - 1, s, si, map);
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         int[] pre = new int[]{1, 2, 3, 4, 5, 6, 7};
         int[] in = new int[]{3, 2, 4, 1, 6, 5, 7};
         int[] post = new int[]{3, 4, 2, 6, 7, 5, 1};
